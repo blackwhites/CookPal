@@ -17,6 +17,7 @@ tab1, tab2 = st.tabs(['Recognize Food', 'About'])
 
 with tab1:
     input = st.radio('Choose an input method:', ['Camera', 'Text'])
+    num_of_rcps = st.number_input('Select number of suggested recipes:', 1, 3, 1, 1)
 
     if input == 'Camera':
         buffer = st.camera_input('Take a picture of food items!')
@@ -31,7 +32,7 @@ with tab1:
 
     if food_tags:
         prompt = f'''
-        Provide 1-3 recipe suggestions for these food items: {food_tags}
+        Provide {num_of_rcps} recipe suggestions for these food items: {food_tags}
         Write in this structure:
         <dish name> (in bold)
         <instructions>
