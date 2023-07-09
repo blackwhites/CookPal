@@ -1,7 +1,8 @@
 import os
 import streamlit as st
 from PIL import Image
-from VertexAIChat import ChatBot
+from GCPVertexAI import ChatBot
+from ClarifaiAPI import FoodRecognizer
 
 st.set_page_config('CookPal', ':cook:')
 st.title('CookPal :cook:')
@@ -10,8 +11,8 @@ ROOT_DIR = os.path.dirname(__file__)
 with open(os.path.join(ROOT_DIR, 'about.txt')) as f:
     about = f.read()
 
-chatbot = ChatBot(dict(st.secrets))
-# load food_recognizer model here
+chatbot = ChatBot(dict(st.secrets['gcp_service_account']))
+food_recognizer = FoodRecognizer(st.secrets['clarifai_api']['PAT'])
 
 tab1, tab2 = st.tabs(['Recognize Food', 'About'])
 
@@ -23,8 +24,9 @@ with tab1:
         buffer = st.camera_input('Take a picture of food items!')
         if buffer:
             img = Image.open(buffer)
-            # preprocess (resize, noramlize) and inference
-            food_tags = '' # list of recognized food items
+            response = food_recognizer.recognize(img)
+            food_tags = ', '.join(response.keys())
+            st.info(f'Food Tags Recognized: {food_tags}')
         else:
             food_tags = ''
     else:
@@ -43,7 +45,6 @@ with tab1:
         '''
         response = chatbot.send_msg(prompt)
         st.write(response)
-
 
 with tab2:
     st.write(about)
