@@ -31,7 +31,7 @@ with tab1:
 
     if food_tags:
         prompt = f'''
-        Provide 3 recipe suggestions for these food items: {food_tags}
+        Provide 1-3 recipe suggestions for these food items: {food_tags}
         Write in this structure:
         <dish name> (in bold)
         <instructions>
