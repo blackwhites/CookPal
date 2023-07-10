@@ -1,5 +1,7 @@
 # CookPal
 
+Streamlit Webapp: https://cookpal-louisljz.streamlit.app/
+
 CookPal is an innovative food management application designed to reduce food waste and enhance user convenience. 
 With a user-friendly interface, it offers both camera input and manual text input of food items, catering to diverse user preferences. 
 Additionally, CookPal provides recipe suggestions based on identified ingredients, encouraging creative ways to reuse items and maximize pantry resources. 
